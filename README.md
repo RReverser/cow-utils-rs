@@ -1,5 +1,8 @@
 # Copy-on-write string utils for Rust
 
+[![Crate docs](https://img.shields.io/crates/v/cow-utils)](https://docs.rs/cow-utils/latest/cow_utils/trait.CowUtils.html)
+[![License](https://img.shields.io/github/license/RReverser/cow-utils-rs)](LICENSE)
+
 Some [`str`](https://doc.rust-lang.org/std/primitive.str.html) methods
 perform destructive transformations and so they allocate, copy into and
 return a new
@@ -47,7 +50,3 @@ strings instead of the regular ones:
 - `.cow_to_uppercase` instead of [`str::to_uppercase`](https://doc.rust-lang.org/std/primitive.str.html#method.to_uppercase)
 
 Check out [the docs](https://docs.rs/cow-utils/latest/cow_utils/trait.CowUtils.html) for detailed examples.
-
-## License
-
-MIT
