@@ -16,6 +16,18 @@ but in the future might be extended to other types where even more
 efficient handling is possible (e.g. in-place modifications on mutable
 strings).
 
+## Performance
+
+The primary motivation for this crate was ability to perform zero-alloc replacements when no match is found, so showing results only for `.replace` vs `.cow_replace` for now.
+
+The actual results will vary depending on the inputs, but here is a taster based on `"a".repeat(40)` as an input and various modes (nothing matched, everything matched and replaced, everything matched from the start and deleted):
+
+| params     | .replace (ns) | .cow_replace (ns) | difference (%) |
+|------------|---------------|-------------------|----------------|
+| ("a", "")  | 408.59        | 290.27            | -29            |
+| ("b", "c") | 98.78         | 54.00             | -45            |
+| ("a", "b") | 985.99        | 1,000.70          | +1             |
+
 ## Usage
 
 First, you need to import `CowUtils` into the scope:
