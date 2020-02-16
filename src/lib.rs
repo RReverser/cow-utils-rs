@@ -1,6 +1,12 @@
+#![no_std]
 #![cfg_attr(feature = "nightly", feature(pattern))]
 
-use std::borrow::Cow;
+extern crate alloc;
+
+use alloc::{
+    borrow::{Cow, ToOwned},
+    string::String,
+};
 
 /// This trait is a shim for the required functionality
 /// normally provided directly by [`std::str::pattern::Pattern`]
@@ -24,7 +30,7 @@ pub trait Pattern<'s> {
 macro_rules! impl_pattern {
 	($ty:ty $(where $($bound:tt)*)?) => {
 		impl<'s $(, $($bound)*)?> Pattern<'s> for $ty {
-			type MatchIndices = std::str::MatchIndices<'s, Self>;
+			type MatchIndices = core::str::MatchIndices<'s, Self>;
 
 			fn match_indices_in(self, s: &'s str) -> Self::MatchIndices {
 				s.match_indices(self)
@@ -44,7 +50,7 @@ const _: () = {
 };
 
 #[cfg(feature = "nightly")]
-impl_pattern!(P where P: std::str::pattern::Pattern<'s>);
+impl_pattern!(P where P: core::str::pattern::Pattern<'s>);
 
 /// Some [`str`] methods perform destructive transformations and so
 /// return [`String`] even when no modification is necessary.
