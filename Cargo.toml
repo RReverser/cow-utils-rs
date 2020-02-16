@@ -5,7 +5,7 @@ authors = ["Ingvar Stepanyan <me@rreverser.com>"]
 edition = "2018"
 license = "MIT"
 description = "Copy-on-write string utilities for Rust"
-repository = "RReverser/cow-utils-rs"
+repository = "https://github.com/RReverser/cow-utils-rs"
 categories = ["text-processing"]
 keywords = ["string", "str", "text", "cow"]
 
