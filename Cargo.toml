@@ -8,6 +8,7 @@ description = "Copy-on-write string utilities for Rust"
 repository = "https://github.com/RReverser/cow-utils-rs"
 categories = ["text-processing"]
 keywords = ["string", "str", "text", "cow"]
+readme = "README.md"
 
 [dev-dependencies]
 assert_matches = "1.3.0"
