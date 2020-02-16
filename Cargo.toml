@@ -6,6 +6,8 @@ edition = "2018"
 license = "MIT"
 description = "Copy-on-write string utilities for Rust"
 repository = "RReverser/cow-utils-rs"
+categories = ["text-processing"]
+keywords = ["string", "str", "text", "cow"]
 
 [dev-dependencies]
 assert_matches = "1.3.0"
