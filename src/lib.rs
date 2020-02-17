@@ -1,4 +1,6 @@
-#![no_std]
+// Disable no_std in doctests on stable Rust.
+// See https://github.com/RReverser/cow-utils-rs/pull/1#issuecomment-586973518.
+#![cfg_attr(any(not(doctest), feature = "nightly"), no_std)]
 #![cfg_attr(feature = "nightly", feature(pattern))]
 
 extern crate alloc;
