@@ -1,6 +1,14 @@
+// Disable no_std in doctests on stable Rust.
+// See https://github.com/RReverser/cow-utils-rs/pull/1#issuecomment-586973518.
+#![cfg_attr(any(not(doctest), feature = "nightly"), no_std)]
 #![cfg_attr(feature = "nightly", feature(pattern))]
 
-use std::borrow::Cow;
+extern crate alloc as std;
+
+use std::{
+    borrow::{Cow, ToOwned},
+    string::String,
+};
 
 /// This trait is a shim for the required functionality
 /// normally provided directly by [`std::str::pattern::Pattern`]

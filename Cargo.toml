@@ -6,7 +6,7 @@ edition = "2018"
 license = "MIT"
 description = "Copy-on-write string utilities for Rust"
 repository = "https://github.com/RReverser/cow-utils-rs"
-categories = ["text-processing"]
+categories = ["no-std", "text-processing"]
 keywords = ["string", "str", "text", "cow"]
 readme = "README.md"
 
