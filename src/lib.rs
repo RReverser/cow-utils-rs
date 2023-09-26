@@ -170,6 +170,7 @@ impl<'s> CowUtils<'s> for &'s str {
     /// assert_matches!("ὀδυσσεύς".cow_to_lowercase(), Cow::Borrowed("ὀδυσσεύς"));
     /// assert_matches!("ὈΔΥΣΣΕΎΣ".cow_to_lowercase(), Cow::Owned(s) if s == "ὀδυσσεύς");
     /// assert_matches!("AbCd".cow_to_lowercase(), Cow::Owned(s) if s == "abcd");
+    /// assert_matches!("ᾈ".cow_to_lowercase(), Cow::Owned(s) if s == "ᾀ");
     /// ```
     fn cow_to_lowercase(self) -> Self::Output {
         // `str::to_lowercase` has a tricky edgecase with handling of Σ.
@@ -177,7 +178,7 @@ impl<'s> CowUtils<'s> for &'s str {
         // but it wouldn't be particularly clean, so for now just check
         // if the string contains any uppercase char and let
         // `str::to_lowercase` rescan it again.
-        if self.chars().any(char::is_uppercase) {
+        if self.chars().any(changes_when_lowercased) {
             Cow::Owned(self.to_lowercase())
         } else {
             Cow::Borrowed(self)
@@ -218,9 +219,10 @@ impl<'s> CowUtils<'s> for &'s str {
     /// assert_matches!("ὈΔΥΣΣΕΎΣ".cow_to_uppercase(), Cow::Borrowed("ὈΔΥΣΣΕΎΣ"));
     /// assert_matches!("ὀδυσσεύς".cow_to_uppercase(), Cow::Owned(s) if s == "ὈΔΥΣΣΕΎΣ");
     /// assert_matches!("AbCd".cow_to_uppercase(), Cow::Owned(s) if s == "ABCD");
+    /// assert_matches!("ᾈ".cow_to_uppercase(), Cow::Owned(s) if s == "ἈΙ");
     /// ```
     fn cow_to_uppercase(self) -> Self::Output {
-        match self.find(char::is_lowercase) {
+        match self.find(changes_when_uppercased) {
             Some(pos) => {
                 let mut output = String::with_capacity(self.len());
                 // We already know position of the first lowercase char,
@@ -236,4 +238,12 @@ impl<'s> CowUtils<'s> for &'s str {
             None => Cow::Borrowed(self),
         }
     }
+}
+
+fn changes_when_lowercased(c: char) -> bool {
+    !core::iter::once(c).eq(c.to_lowercase())
+}
+
+fn changes_when_uppercased(c: char) -> bool {
+    !core::iter::once(c).eq(c.to_uppercase())
 }
