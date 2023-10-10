@@ -6,7 +6,7 @@
 // - RK_UNIFORM_BOTH, ranges=10, chars=31
 pub(crate) const CHANGES_WHEN_LOOKUP_TAB: &[u32; 225] = &[
     0x0005a801, // RK_UNIFORM_UPPER,len=1 : U+00b5 ('µ')
-    0x00060117, // RK_UNIFORM_LOWER,len=23 : U+00c0..=U+00d6U+00c0..=U+00d6 ('À'..='Ö')
+    0x00060117, // RK_UNIFORM_LOWER,len=23 : U+00c0..=U+00d 6U+00c0..=U+00d6 ('À'..='Ö')
     0x0006c107, // RK_UNIFORM_LOWER,len=7 : U+00d8..=U+00deU+00d8..=U+00de ('Ø'..='Þ')
     0x0006f818, // RK_UNIFORM_UPPER,len=24 : U+00df..=U+00f6U+00df..=U+00f6 ('ß'..='ö')
     0x0007c008, // RK_UNIFORM_UPPER,len=8 : U+00f8..=U+00ffU+00f8..=U+00ff ('ø'..='ÿ')
@@ -233,4 +233,5 @@ pub(crate) const CHANGES_WHEN_LOOKUP_TAB: &[u32; 225] = &[
 ];
 pub(super) type ChangesWhenTableType = [u32; 225];
 
+#[cfg(test)]
 pub(super) const UNICODE_VERSION: (u8, u8, u8) = (15, 0, 0);

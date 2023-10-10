@@ -491,6 +491,5 @@ pub fn emit_tab(name: &str, t: &[u32], r: &[FoundCharRange]) -> String {
 
 type ChangesWhenTableType = [u32];
 
-mod check {
-    include!("../../src/case/table.rs");
-}
+#[path = "./search.rs"]
+mod check;

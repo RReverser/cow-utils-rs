@@ -1,4 +1,5 @@
-pub(super) fn changes_when_casemapped_nonascii<const MAP_LOWER: bool>(
+// FIXME dupe
+pub(crate) fn changes_when_casemapped_nonascii<const MAP_LOWER: bool>(
     needle: char,
     tab: &super::ChangesWhenTableType,
 ) -> bool {
@@ -31,6 +32,11 @@ pub(super) fn changes_when_casemapped_nonascii<const MAP_LOWER: bool>(
             } else {
                 odd_is_lower == !odd
             }
+            // match (range_kind == RK_ALT_UPPER_LOWER, MAP_LOWER) {
+            //     (true, true) | (false, true) => !odd,
+            //     (true, false) | (false, false) => odd,
+            //     _ => false,
+            // }
         }
         rk => {
             debug_assert!(false, "bad rangekind {:?}", rk);
@@ -39,7 +45,7 @@ pub(super) fn changes_when_casemapped_nonascii<const MAP_LOWER: bool>(
     }
 }
 
-pub(super) fn find_encoded_case_range(
+pub(crate) fn find_encoded_case_range(
     needle: char,
     ranges: &super::ChangesWhenTableType,
 ) -> Option<u32> {
