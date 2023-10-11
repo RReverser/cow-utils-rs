@@ -21,3 +21,6 @@ harness = false
 [features]
 default = []
 nightly = []
+
+[workspace]
+members = [".", "tabgen"]
